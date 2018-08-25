@@ -1,0 +1,39 @@
+$color: rgb(0, 4, 255);
+#name {
+    //..
+    color: $color;
+}
+
+#surname {
+    //...
+    color: $color;
+}
+
+@mixin soft-border($border-radius) {
+    // shared attributes
+    border: 1px solid #ccc;
+    border-radius: $border-radius;
+    padding: 10px;
+}
+
+.box {
+    @include soft-border(5px);
+}
+
+.mordern-box {
+    @include soft-border(10px);
+}
+
+// creating custom theme
+@import "~@angular/material/_theming";
+@include mat-core();
+// define custom colors - primary, accent, warn
+// called the primary mat-palette for colors which returns a primary color obejct
+$app-primary: mat-palette($mat-blue, 600);
+$app-accent: mat-palette($mat-yellow, 700);
+$app-warn: mat-palette($mat-red);
+$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn); // mat-dark-theme();
+@include angular-material-theme($app-theme);
+// Define custom typography
+$app-typography: mat-typography-config( $font-family: '"Open Sans", "Helvetica Neue", "sans-serif"', $headline: mat-typography-level(35px, 32px, 700));
+@include angular-material-typography($app-typography);
